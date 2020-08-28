@@ -3,58 +3,81 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  searchTheEpisodes();
 }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+
 
   episodeList.forEach((episode) => {
 
-    let containerName = document.createElement("div");
+    const containerName = document.createElement("div");
     containerName.className = "container";
 
-    let divRow = document.createElement("div");
+    const divRow = document.createElement("div");
     divRow.className = "row";
 
-    let divCard = document.createElement("div");
+    const divCard = document.createElement("div");
     divCard.className = "card col-4";
 
-    let divCardHeader = document.createElement("div");
+    const divCardHeader = document.createElement("div");
     divCardHeader.className = "card-header";
 
-    let episodeName = document.createElement("h5");
+    const episodeName = document.createElement("h5");
     episodeName.className = "card-title";
     episodeName.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number ).slice(-2)}`;
 
-    let episodeImage = document.createElement("img");
+    const episodeImage = document.createElement("img");
     episodeImage.className = "card-img-top";
     episodeImage.src = episode.image.medium;
 
-    let cardPElement = document.createElement("p");
+    const cardPElement = document.createElement("p");
     cardPElement.className = "card-text";
     cardPElement.innerHTML = episode.summary;
 
-    let cardFooter = document.createElement("div");
+    const cardFooter = document.createElement("div");
     cardFooter.className = "card-footer";
 
-    let cardFooterLink = document.createElement("a");
+    const cardFooterLink = document.createElement("a");
     cardFooterLink.className = "card-link";
-    cardFooterLink.href = "https: //www.tvmaze.com/";
+    cardFooterLink.innerHTML = "The data has(originally) come from TVMaze.com";
+    cardFooterLink.href = "https://www.tvmaze.com/";
 
     // Appending the created elements
-    cardFooter.appendChild(cardFooterLink);
-    divCard.appendChild(cardFooter);
-    divCard.appendChild(cardPElement);
-    divCard.appendChild(episodeImage);
-    divCardHeader.appendChild(episodeName);
-    divCard.appendChild(divCardHeader);
-    divRow.appendChild(divCard);
-    containerName.appendChild(divRow);
     rootElem.appendChild(containerName);
+    containerName.appendChild(divRow);
+    divRow.appendChild(divCard);
+    divCard.appendChild(divCardHeader);
+    divCardHeader.appendChild(episodeName);
+    divCard.appendChild(episodeImage);
+    divCard.appendChild(cardPElement);
+    divCard.appendChild(cardFooter);
+    cardFooter.appendChild(cardFooterLink);
   })
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 
 }
 
 window.onload = setup;
+
+// Search Bar creation and search function
+function searchTheEpisodes() {
+  const searchNavBar = document.createElement("nav");
+  searchNavBar.className = "navbar navbar - light bg - light";
+
+  const searchFormElement = document.createElement("form");
+  searchFormElement.className = "form-inline";
+
+  const inputElement = document.createElement("input");
+  inputElement.className = "form-control mr-sm-2";
+  const inputSpanElement = document.createElement("span");
+  inputSpanElement.innerText = `Displaying ${episode.length} episodes match the current search`;
+
+
+
+}
+
+
+
+//const AllEpisodes = getAllEpisodes();

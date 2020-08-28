@@ -1,3 +1,15 @@
 #root {
-  color: red;
+  color: rgb(20, 20, 20);
+  
+}
+
+.container{
+ 
+}
+
+.row{
+  
+}
+.card {
+  margin: 10px;
 }
