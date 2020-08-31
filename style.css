@@ -1,10 +1,14 @@
+body{
+
+}
+
 #root {
   color: rgb(20, 20, 20);
-  
+
 }
 
 .container{
- 
+
 }
 
 .row{
@@ -12,4 +16,13 @@
 }
 .card {
   margin: 10px;
+}
+.card-header{
+  margin: 10px;
+}
+.card-footer{
+
+}
+.form-inline{
+  width:100%;
 }
