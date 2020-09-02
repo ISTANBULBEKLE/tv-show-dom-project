@@ -96,6 +96,7 @@ function searchTheEpisodes() {
   searchFormElement.appendChild(inputSpanElement);
 
   function inputSelect(e) {
+<<<<<<< Updated upstream
     const addedInput  = e.target.value.toLowerCase();
     const cardList    = document.querySelectorAll(".card");
 
@@ -103,6 +104,41 @@ function searchTheEpisodes() {
     list.forEach(function (card) {
       if (card.innerText.toLowerCase().indexOf(addedInput) !== -1) {
         card.style.display = "block";
+||||||| merged common ancestors
+    const addedInput = e.target.value.toLowerCase();
+
+    allEpisodes.forEach((episode) => {
+      if (episode.name.toLowerCase().indexOf(addedInput) !== -1 || episode.summary.toLowerCase().indexOf(addedInput) !== -1) {
+        console.log(episode.name);
+        const cardTitle = document.querySelectorAll("card-title");
+        const cardSummary = document.querySelectorAll("card-text");
+        console.log(cardTitle);
+        
+        cardTitle.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
+        cardSummary.innerHTML = episode.summary;
+
+        cardTitle.innerText.style.display = "block";
+        cardSummary.innerHTML.style.display = "block";
+
+        inputSpanElement.textContent = `Displaying ${cardTitle.length}/73 episodes match the current search`;
+=======
+    const addedInput = e.target.value.toLowerCase();
+
+    allEpisodes.forEach((episode) => {
+      if (episode.name.toLowerCase().indexOf(addedInput) !== -1 || episode.summary.toLowerCase().indexOf(addedInput) !== -1) {
+        // console.log(episode.name);
+        const cardTitle = document.querySelector(".card-title");
+        const cardSummary = document.querySelector(".card-text");
+        console.log(cardTitle);
+
+        cardTitle.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
+        cardSummary.innerHTML = episode.summary;
+
+        cardTitle.innerText.style.display = "block";
+        cardSummary.innerHTML.style.display = "block";
+
+        inputSpanElement.textContent = `Displaying ${cardTitle.length}/73 episodes match the current search`;
+>>>>>>> Stashed changes
       } else {
         card.style.display = "none";
       }
@@ -137,6 +173,7 @@ function selectTheEpisodeFromList() {
     selectElement.appendChild(optionElement);
   })
 
+<<<<<<< Updated upstream
   selectElement.addEventListener("change", selectFromMenu);
 
   function selectFromMenu(event) {
@@ -157,4 +194,12 @@ function selectTheEpisodeFromList() {
     selectElement.value = "";
   }
 
+||||||| merged common ancestors
+
+
+
+
+
+=======
+>>>>>>> Stashed changes
 }
