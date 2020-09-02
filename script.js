@@ -1,5 +1,4 @@
-// You can edit ALL of the code here
-
+// This function is called with window onload calling other functions.
 function setup() {
   const allEpisodes = getAllEpisodes();
   createInitialDivs();
@@ -8,55 +7,42 @@ function setup() {
   selectTheEpisodeFromList();
 }
 
+// This function create initial 'container' (div) 'row' (div) and append them to 'rootElem'.
 function createInitialDivs() {
   const rootElem = document.getElementById("root");
   const containerName = document.createElement("div");
   containerName.className = "container";
   const divRow = document.createElement("div");
   divRow.className = "row";
-
   rootElem.appendChild(containerName);
   containerName.appendChild(divRow);
 }
-
+// This function search the input value in the card title and card summary.
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  // const bodyElement = document.querySelector("body");
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-
   const containerName = document.querySelector(".container");
   const divRow = document.querySelector(".row");
 
   episodeList.forEach((episode) => {
     const divCard = document.createElement("div");
     divCard.className = "card col-3";
-
     const divCardHeader = document.createElement("div");
     divCardHeader.className = "card-header";
-
     const episodeName = document.createElement("h5");
     episodeName.className = "card-title";
-    episodeName.innerText = `${episode.name} - S${("0" + episode.season).slice(
-      -2
-    )}E${("0" + episode.number).slice(-2)}`;
-
+    episodeName.innerText = `${episode.name} - S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2,"0")}`;
     const episodeImage = document.createElement("img");
     episodeImage.className = "card-img-top";
     episodeImage.src = episode.image.medium;
-
     const cardPElement = document.createElement("p");
     cardPElement.className = "card-text";
     cardPElement.innerHTML = episode.summary;
-
     const cardFooter = document.createElement("div");
     cardFooter.className = "card-footer";
-
     const cardFooterLink = document.createElement("a");
     cardFooterLink.className = "card-link";
     cardFooterLink.innerHTML = "The data has(originally) come from TVMaze.com";
     cardFooterLink.href = "https://www.tvmaze.com/";
-
-    // Appending the created elements
 
     divRow.appendChild(divCard);
     divCard.appendChild(divCardHeader);
@@ -70,21 +56,21 @@ function makePageForEpisodes(episodeList) {
 
 window.onload = setup;
 
-// Search Bar creation and search function
+// This function creates a search bar to look for input value that matches with the values in the 'card title' or 'card summary'.
 function searchTheEpisodes() {
   const rootElem = document.getElementById("root");
   const allEpisodes = getAllEpisodes();
-
   const searchNavBar = document.createElement("nav");
   searchNavBar.className = "navbar navbar-light bg-light";
-
   const searchFormElement = document.createElement("form");
   searchFormElement.className = "form-inline";
-
   const inputElement = document.createElement("input");
   inputElement.className = "form-control mr-sm-2";
   inputElement.setAttribute("type", "search");
-  inputElement.setAttribute("placeholder", "Search");
+  inputElement.setAttribute(
+    "placeholder",
+    "Search for the matching value in the episode title or episodes summaries"
+  );
   inputElement.setAttribute("aria-label", "Search");
 
   const inputSpanElement = document.createElement("span");
@@ -113,7 +99,7 @@ function searchTheEpisodes() {
   }
   inputElement.addEventListener("input", inputSelect);
 }
-
+// This function creates a selection bar to select episode and shows that episode only in the window.
 function selectTheEpisodeFromList() {
   const allEpisodes = getAllEpisodes();
   const rootElem = document.getElementById("root");
@@ -132,10 +118,7 @@ function selectTheEpisodeFromList() {
 
   allEpisodes.forEach((episode) => {
     const optionElement = document.createElement("option");
-    //optionElement.setAttribute('value', );
-    optionElement.innerText = `S${("0" + episode.season).slice(-2)}E${(
-      "0" + episode.number
-    ).slice(-2)} - ${episode.name}`;
+    optionElement.innerText = `S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2,"0")} - ${episode.name}`;
     selectElement.appendChild(optionElement);
   });
 
@@ -147,13 +130,7 @@ function selectTheEpisodeFromList() {
       makePageForEpisodes(allEpisodes);
     } else {
       const selectedEpisode = allEpisodes.filter((episode) => {
-        return (
-          `S${episode.season
-            .toString()
-            .padStart(2, "0")}E${episode.number
-            .toString()
-            .padStart(2, "0")} - ${episode.name}` === selectElement.value
-        );
+        return (`S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${episode.name}` === selectElement.value);
       });
       divRow.innerHTML = "";
       makePageForEpisodes(selectedEpisode);

@@ -28,5 +28,8 @@ body{
 }
 
 .form-inline{
-  width:100%;
+ /*  width:50%; */
+}
+.form-control{
+ 
 }
