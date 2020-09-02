@@ -98,6 +98,7 @@ function searchTheEpisodes() {
         const cardTitle = document.querySelectorAll("card-title");
         const cardSummary = document.querySelectorAll("card-text");
         console.log(cardTitle);
+        
         cardTitle.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
         cardSummary.innerHTML = episode.summary;
 
@@ -116,6 +117,7 @@ function searchTheEpisodes() {
 
 
 function selectTheEpisodeFromList() {
+  const allEpisodes = getAllEpisodes();
   const rootElem = document.getElementById("root");
   const searchNavBar = document.createElement("nav");
 
@@ -125,11 +127,20 @@ function selectTheEpisodeFromList() {
   selectElement.className = "custom-select";
   selectElement.setAttribute("id", "inputGroupSelect04");
   selectElement.setAttribute("aria-label", "Example select with button addon");
-  const optionElement = document.createElement("option");
-  optionElement.setAttribute("value", "");
-  optionElement.innerText = "S01E01 - Winter is Coming";
 
-  rootElem.appendChild(inputGroup);
+  rootElem.prepend(inputGroup);
   inputGroup.appendChild(selectElement);
-  selectElement.appendChild(optionElement);
+
+  allEpisodes.forEach((episode) => {
+    const optionElement = document.createElement("option");
+    //optionElement.setAttribute('value', );
+    optionElement.innerText = `S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}-${episode.name}`;
+    selectElement.appendChild(optionElement);
+  })
+
+
+
+
+
+
 }
