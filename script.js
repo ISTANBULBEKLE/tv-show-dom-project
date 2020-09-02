@@ -2,21 +2,9 @@
 
 function setup() {
   const allEpisodes = getAllEpisodes();
-  createInitialDivs();
   makePageForEpisodes(allEpisodes);
   searchTheEpisodes();
   selectTheEpisodeFromList();
-}
-
-function createInitialDivs() {
-  const rootElem = document.getElementById("root");
-  const containerName = document.createElement("div");
-  containerName.className = "container";
-  const divRow = document.createElement("div");
-  divRow.className = "row";
-
-  rootElem.appendChild(containerName);
-  containerName.appendChild(divRow);
 }
 
 function makePageForEpisodes(episodeList) {
@@ -24,8 +12,14 @@ function makePageForEpisodes(episodeList) {
   // const bodyElement = document.querySelector("body");
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 
-  const containerName = document.querySelector(".container");
-  const divRow = document.querySelector(".row");
+  const containerName = document.createElement("div");
+  containerName.className = "container";
+
+  const divRow = document.createElement("div");
+  divRow.className = "row";
+
+  rootElem.appendChild(containerName);
+  containerName.appendChild(divRow);
 
   episodeList.forEach((episode) => {
 
@@ -96,37 +90,11 @@ function searchTheEpisodes() {
   searchFormElement.appendChild(inputSpanElement);
 
   function inputSelect(e) {
-<<<<<<< Updated upstream
-    const addedInput  = e.target.value.toLowerCase();
-    const cardList    = document.querySelectorAll(".card");
-
-    let list = Array.from(cardList);
-    list.forEach(function (card) {
-      if (card.innerText.toLowerCase().indexOf(addedInput) !== -1) {
-        card.style.display = "block";
-||||||| merged common ancestors
     const addedInput = e.target.value.toLowerCase();
 
     allEpisodes.forEach((episode) => {
       if (episode.name.toLowerCase().indexOf(addedInput) !== -1 || episode.summary.toLowerCase().indexOf(addedInput) !== -1) {
-        console.log(episode.name);
-        const cardTitle = document.querySelectorAll("card-title");
-        const cardSummary = document.querySelectorAll("card-text");
-        console.log(cardTitle);
-        
-        cardTitle.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
-        cardSummary.innerHTML = episode.summary;
-
-        cardTitle.innerText.style.display = "block";
-        cardSummary.innerHTML.style.display = "block";
-
-        inputSpanElement.textContent = `Displaying ${cardTitle.length}/73 episodes match the current search`;
-=======
-    const addedInput = e.target.value.toLowerCase();
-
-    allEpisodes.forEach((episode) => {
-      if (episode.name.toLowerCase().indexOf(addedInput) !== -1 || episode.summary.toLowerCase().indexOf(addedInput) !== -1) {
-        // console.log(episode.name);
+         //console.log(episode.name);
         const cardTitle = document.querySelector(".card-title");
         const cardSummary = document.querySelector(".card-text");
         console.log(cardTitle);
@@ -138,15 +106,13 @@ function searchTheEpisodes() {
         cardSummary.innerHTML.style.display = "block";
 
         inputSpanElement.textContent = `Displaying ${cardTitle.length}/73 episodes match the current search`;
->>>>>>> Stashed changes
       } else {
-        card.style.display = "none";
+        cardTitle.innerText.style.display = "none";
+        cardSummary.innerHTML.style.display = "none";
       }
-    });
-    let newList = list.filter((item) => item.style.display === "block");
-    inputSpanElement.textContent = `Displaying ${newList.length}/73 episodes match the current search`;
+    })
   }
-  inputElement.addEventListener("input", inputSelect);
+  inputElement.addEventListener("keyup", inputSelect);
 }
 
 
@@ -154,7 +120,6 @@ function selectTheEpisodeFromList() {
   const allEpisodes = getAllEpisodes();
   const rootElem = document.getElementById("root");
   const searchNavBar = document.createElement("nav");
-  const divRow = document.querySelector(".row");
 
   const inputGroup = document.createElement("div");
   inputGroup.className = "input-group";
@@ -169,37 +134,8 @@ function selectTheEpisodeFromList() {
   allEpisodes.forEach((episode) => {
     const optionElement = document.createElement("option");
     //optionElement.setAttribute('value', );
-    optionElement.innerText = `S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)} - ${episode.name}`;
+    optionElement.innerText = `S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}-${episode.name}`;
     selectElement.appendChild(optionElement);
   })
 
-<<<<<<< Updated upstream
-  selectElement.addEventListener("change", selectFromMenu);
-
-  function selectFromMenu(event) {
-    if (event.target.value === "none") {
-        divRow.innerHTML = "";
-        makePageForEpisodes(allEpisodes);
-    } else {
-        const selectedEpisode = allEpisodes.filter((episode) => {
-          return (
-            `S${episode.season.toString()
-              .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")
-            } - ${episode.name}` === selectElement.value
-            );
-        });
-        divRow.innerHTML = "";
-        makePageForEpisodes(selectedEpisode);
-    }
-    selectElement.value = "";
-  }
-
-||||||| merged common ancestors
-
-
-
-
-
-=======
->>>>>>> Stashed changes
 }
