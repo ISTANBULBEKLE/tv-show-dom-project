@@ -4,11 +4,12 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   searchTheEpisodes();
+  selectTheEpisodeFromList();
 }
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  const bodyElement = document.querySelector("body");
+  // const bodyElement = document.querySelector("body");
   // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 
   const containerName = document.createElement("div");
@@ -17,7 +18,7 @@ function makePageForEpisodes(episodeList) {
   const divRow = document.createElement("div");
   divRow.className = "row";
 
-  bodyElement.appendChild(containerName);
+  rootElem.appendChild(containerName);
   containerName.appendChild(divRow);
 
   episodeList.forEach((episode) => {
@@ -30,7 +31,7 @@ function makePageForEpisodes(episodeList) {
 
     const episodeName = document.createElement("h5");
     episodeName.className = "card-title";
-    episodeName.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number ).slice(-2)}`;
+    episodeName.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
 
     const episodeImage = document.createElement("img");
     episodeImage.className = "card-img-top";
@@ -80,51 +81,55 @@ function searchTheEpisodes() {
   inputElement.setAttribute("placeholder", "Search");
   inputElement.setAttribute("aria-label", "Search");
 
-  console.log(inputElement);
   const inputSpanElement = document.createElement("span");
-  inputSpanElement.textContent = "Display how many episodes match the current search"
-  console.log(inputSpanElement);
+  inputSpanElement.textContent = "Display how many episodes match the current search";
 
-
-  rootElem.appendChild(searchNavBar);
+  rootElem.prepend(searchNavBar);
   searchNavBar.appendChild(searchFormElement);
   searchFormElement.appendChild(inputElement)
   searchFormElement.appendChild(inputSpanElement);
 
-  console.log(searchNavBar);
-
-  const episodeNames = [];
-  const episodeSummary = [];
-
-  allEpisodes.forEach((episode) => {
-    episodeNames.push(episode.name);
-    episodeSummary.push(episode.summary);
-  });
-
-  console.log(episodeNames);
-
   function inputSelect(e) {
     const addedInput = e.target.value.toLowerCase();
-    console.log(addedInput);
-    for (i = 0; i < episodeNames.length; i++) {
-      if (episodeNames[i].toLowerCase().indexOf(addedInput) !== -1 || episodeSummary[i].toLowerCase().indexOf(addedInput) !== -1) {
 
-        episodeNames[i].style.display = "block";
-        episodeSummary[i].style.display = "block";
-        inputSpanElement.textContent = `Displaying ${episodeNames[i].length} episodes match the current search`;
+    allEpisodes.forEach((episode) => {
+      if (episode.name.toLowerCase().indexOf(addedInput) !== -1 || episode.summary.toLowerCase().indexOf(addedInput) !== -1) {
+        console.log(episode.name);
+        const cardTitle = document.querySelectorAll("card-title");
+        const cardSummary = document.querySelectorAll("card-text");
+        console.log(cardTitle);
+        cardTitle.innerText = `${episode.name} - S${("0" + episode.season).slice(-2)}E${("0" + episode.number).slice(-2)}`;
+        cardSummary.innerHTML = episode.summary;
 
+        cardTitle.innerText.style.display = "block";
+        cardSummary.innerHTML.style.display = "block";
+
+        inputSpanElement.textContent = `Displaying ${cardTitle.length}/73 episodes match the current search`;
       } else {
-        episodeNames[i].style.display = "none";
-        episodeSummary[i].style.display = "none";
+        cardTitle.innerText.style.display = "none";
+        cardSummary.innerHTML.style.display = "none";
       }
-    }
-    console.log(addedInput);
+    })
   }
-
-  inputElement.addEventListener("change", inputSelect);
-  console.log(inputElement);
+  inputElement.addEventListener("keyup", inputSelect);
 }
 
 
+function selectTheEpisodeFromList() {
+  const rootElem = document.getElementById("root");
+  const searchNavBar = document.createElement("nav");
 
-//const AllEpisodes = getAllEpisodes();
+  const inputGroup = document.createElement("div");
+  inputGroup.className = "input-group";
+  const selectElement = document.createElement("select");
+  selectElement.className = "custom-select";
+  selectElement.setAttribute("id", "inputGroupSelect04");
+  selectElement.setAttribute("aria-label", "Example select with button addon");
+  const optionElement = document.createElement("option");
+  optionElement.setAttribute("value", "");
+  optionElement.innerText = "S01E01 - Winter is Coming";
+
+  rootElem.appendChild(inputGroup);
+  inputGroup.appendChild(selectElement);
+  selectElement.appendChild(optionElement);
+}
