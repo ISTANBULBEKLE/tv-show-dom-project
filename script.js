@@ -7,7 +7,7 @@ function setup() {
   selectTheEpisodeFromList();
 }
 
-// This function create initial 'container' (div) 'row' (div) and append them to 'rootElem'.
+// This function creates initial 'container' (div) 'row' (div) and append them to 'rootElem'.
 function createInitialDivs() {
   const rootElem = document.getElementById("root");
   const containerName = document.createElement("div");
@@ -17,7 +17,7 @@ function createInitialDivs() {
   rootElem.appendChild(containerName);
   containerName.appendChild(divRow);
 }
-// This function search the input value in the card title and card summary.
+// This function creates a card for each episode and grab them as a whole on screen with window.onload.
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   const containerName = document.querySelector(".container");
@@ -52,8 +52,6 @@ function makePageForEpisodes(episodeList) {
     cardFooter.appendChild(cardFooterLink);
   });
 }
-
-window.onload = setup;
 
 // This function creates a search bar to look for input value that matches with the values in the 'card title' or 'card summary'.
 function searchTheEpisodes() {
@@ -134,3 +132,5 @@ function selectTheEpisodeFromList() {
     selectElement.value = "";
   }
 }
+
+window.onload = setup;
