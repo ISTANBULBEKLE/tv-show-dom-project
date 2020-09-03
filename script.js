@@ -43,7 +43,6 @@ function makePageForEpisodes(episodeList) {
     cardFooterLink.className = "card-link";
     cardFooterLink.innerHTML = "The data has(originally) come from TVMaze.com";
     cardFooterLink.href = "https://www.tvmaze.com/";
-
     divRow.appendChild(divCard);
     divCard.appendChild(divCardHeader);
     divCardHeader.appendChild(episodeName);
@@ -61,21 +60,16 @@ function searchTheEpisodes() {
   const rootElem = document.getElementById("root");
   const allEpisodes = getAllEpisodes();
   const searchNavBar = document.createElement("nav");
-  searchNavBar.className = "navbar navbar-light bg-light";
+  searchNavBar.className = "navbar navbar-light";
   const searchFormElement = document.createElement("form");
   searchFormElement.className = "form-inline";
   const inputElement = document.createElement("input");
   inputElement.className = "form-control mr-sm-2";
   inputElement.setAttribute("type", "search");
-  inputElement.setAttribute(
-    "placeholder",
-    "Search for the matching value in the episode title or episodes summaries"
-  );
+  inputElement.setAttribute("placeholder", "Search...");
   inputElement.setAttribute("aria-label", "Search");
-
   const inputSpanElement = document.createElement("span");
-  inputSpanElement.textContent =
-    "Display how many episodes match the current search";
+  inputSpanElement.textContent = "Display how many episodes match the current search";
 
   rootElem.prepend(searchNavBar);
   searchNavBar.appendChild(searchFormElement);
@@ -95,7 +89,7 @@ function searchTheEpisodes() {
       }
     });
     let newList = list.filter((item) => item.style.display === "block");
-    inputSpanElement.textContent = `Displaying ${newList.length}/73 episodes match the current search`;
+    inputSpanElement.textContent = `Search result: ${newList.length}/73 episodes match the current search`;
   }
   inputElement.addEventListener("input", inputSelect);
 }
@@ -105,16 +99,18 @@ function selectTheEpisodeFromList() {
   const rootElem = document.getElementById("root");
   const searchNavBar = document.createElement("nav");
   const divRow = document.querySelector(".row");
-
   const inputGroup = document.createElement("div");
   inputGroup.className = "input-group";
+  const spanInputGroup = document.createElement('span');
+  spanInputGroup.className = "list-input";
+  spanInputGroup.textContent = 'Select the episode from the list!';
   const selectElement = document.createElement("select");
   selectElement.className = "custom-select";
   selectElement.setAttribute("id", "inputGroupSelect04");
   selectElement.setAttribute("aria-label", "Example select with button addon");
-
   rootElem.prepend(inputGroup);
   inputGroup.appendChild(selectElement);
+  inputGroup.appendChild(spanInputGroup);
 
   allEpisodes.forEach((episode) => {
     const optionElement = document.createElement("option");

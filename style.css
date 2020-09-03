@@ -4,6 +4,7 @@ body{
 
 #root {
   color: rgb(20, 20, 20);
+  background-color: #f3e6e3;
 
 }
 
@@ -15,6 +16,12 @@ body{
   display: flex;
   justify-content: center;
 }
+nav{
+  background-color: #d8d3cd;
+}
+/* .navbar.navbar-light.bg-light{
+  background-color: #d8d3cd;
+} */
 .card {
   margin: 10px;
 
@@ -32,4 +39,14 @@ body{
 }
 .form-control{
  
+}
+.input-group{
+  display: flex;
+  width: 100%;
+  background-color: #e0ece4;
+}
+.list-input{
+  margin-left: 3%;
+  margin-right: 40%;
+
 }
