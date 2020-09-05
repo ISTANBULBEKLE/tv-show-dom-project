@@ -4,20 +4,23 @@ body{
 
 #root {
   color: rgb(20, 20, 20);
-  background-color: #f3e6e3;
+  background-color: #a2d5f2;
 
 }
 
 .container{
 
 }
-
+select{
+  margin:10px;
+}
 .row{
   display: flex;
   justify-content: center;
 }
 nav{
-  background-color: #d8d3cd;
+  background-color: #a2d5f2;
+  margin-top:10px;
 }
 /* .navbar.navbar-light.bg-light{
   background-color: #d8d3cd;
@@ -43,10 +46,11 @@ nav{
 .input-group{
   display: flex;
   width: 100%;
-  background-color: #e0ece4;
+  background-color: #a2d5f2;
 }
 .list-input{
+  margin-top:10px;
   margin-left: 3%;
   margin-right: 40%;
-
+  text-align: center;
 }
