@@ -7,7 +7,10 @@ body{
   background-color: #a2d5f2;
 
 }
-
+h1{
+  background-color: #a2d5f2;
+ text-align: center;
+}
 .container{
 
 }
@@ -39,18 +42,20 @@ nav{
 
 .form-inline{
  /*  width:50%; */
+ 
 }
 .form-control{
- 
+
 }
 .input-group{
   display: flex;
   width: 100%;
+  margin-top:0;
   background-color: #a2d5f2;
 }
 .list-input{
   margin-top:10px;
-  margin-left: 3%;
+  margin-left: 10px;
   margin-right: 40%;
   text-align: center;
 }
