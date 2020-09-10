@@ -15,7 +15,38 @@
 <body>
   <h1>"Unleash the Dragons and Win the War"</h1>
   <div id="root">
+    <div class='row' id='mainRow'>
+      <div class="input-group mb-3 col-4" id='firstSelectDiv'>
+        <select class="custom-select" id="selectShows">
+          <option selected>Choose...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text" for="selectShows">Select the shows</label>
+        </div>
+      </div>
+      <div class="input-group mb-3 col-4" id='secondSelectDiv'>
+        <select class="custom-select" id="selectEpisodes">
+          <option selected>Choose...</option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text" for="selectEpisodes">Select the episodes</label>
+        </div>
+      </div>
+      <button type="button" class="btn btn-warning col-4">Clear the window</button>
+      <nav class="navbar navbar-light bg-light col-4">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </nav>
+    </div>
+    <div class='container'>
+      <div id='cardContainer' class='row'>
 
+      </div>
+    </div>
   </div>
   <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
 

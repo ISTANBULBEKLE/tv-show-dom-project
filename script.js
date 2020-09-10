@@ -2,12 +2,34 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   createInitialDivs();
-  makePageForEpisodes(allEpisodes);
+  // makePageForEpisodes(allEpisodes);
   searchTheEpisodes();
   selectTheEpisodeFromList();
+  fetchDataFromAPI();
+
 }
 
-// This function creates initial 'container' (div) 'row' (div) and append them to 'rootElem'.
+function createSecondSelectForShows() {
+
+}
+
+
+
+///////////// * This function is to fetch the data from the API and for calling the initial makePageForEpisodes ();
+const fetchDataFromAPI = () => {
+  fetch(' https://api.tvmaze.com/shows/82/episodes')
+    .then(response => response.json())
+    .then(data => onCallingTheData(data));
+  // .catch(err => console.log(err));
+}
+
+function onCallingTheData(data) {
+  makePageForEpisodes(data);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+// This function creates initial 'container' (div), 'row' (div) and append them to 'rootElem'.
 function createInitialDivs() {
   const rootElem = document.getElementById("root");
   const containerName = document.createElement("div");
@@ -21,7 +43,7 @@ function createInitialDivs() {
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   const containerName = document.querySelector(".container");
-  const divRow = document.querySelector(".row");
+  const divRow = document.querySelector("#cardContainer");
 
   episodeList.forEach((episode) => {
     const divCard = document.createElement("div");
@@ -91,45 +113,33 @@ function searchTheEpisodes() {
   }
   inputElement.addEventListener("input", inputSelect);
 }
-// This function creates a selection bar to select episode and shows that episode only in the window.
+// This function  selects episode and shows that episode only in the window.
 function selectTheEpisodeFromList() {
   const allEpisodes = getAllEpisodes();
-  const rootElem = document.getElementById("root");
-  const searchNavBar = document.createElement("nav");
-  const divRow = document.querySelector(".row");
-  const inputGroup = document.createElement("div");
-  inputGroup.className = "input-group";
-  const spanInputGroup = document.createElement('span');
-  spanInputGroup.className = "list-input";
-  spanInputGroup.textContent = 'Select the episode from the list!';
-  const selectElement = document.createElement("select");
-  selectElement.className = "custom-select";
-  selectElement.setAttribute("id", "inputGroupSelect04");
-  selectElement.setAttribute("aria-label", "Example select with button addon");
-  rootElem.prepend(inputGroup);
-  inputGroup.appendChild(selectElement);
-  inputGroup.appendChild(spanInputGroup);
+  const secondSelectDiv = document.querySelector('#secondSelectDiv');
+  const selectTheEpisodes = document.querySelector('#selectEpisodes');
+  const cardContainer = document.querySelector('#cardContainer');
 
   allEpisodes.forEach((episode) => {
     const optionElement = document.createElement("option");
     optionElement.innerText = `S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2,"0")} - ${episode.name}`;
-    selectElement.appendChild(optionElement);
+    selectTheEpisodes.appendChild(optionElement);
   });
 
-  selectElement.addEventListener("change", selectFromMenu);
+  selectTheEpisodes.addEventListener("change", selectFromMenu);
 
   function selectFromMenu(event) {
     if (event.target.value === "none") {
-      divRow.innerHTML = "";
+      cardContainer.innerHTML = "";
       makePageForEpisodes(allEpisodes);
     } else {
       const selectedEpisode = allEpisodes.filter((episode) => {
-        return (`S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${episode.name}` === selectElement.value);
+        return (`S${episode.season.toString().padStart(2, "0")}E${episode.number.toString().padStart(2, "0")} - ${episode.name}` === selectTheEpisodes.value);
       });
-      divRow.innerHTML = "";
+      cardContainer.innerHTML = "";
       makePageForEpisodes(selectedEpisode);
     }
-    selectElement.value = "";
+    selectTheEpisodes.value = "";
   }
 }
 
