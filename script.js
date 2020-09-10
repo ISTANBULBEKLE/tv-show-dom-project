@@ -75,26 +75,12 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
-// This function creates a search bar to look for input value that matches with the values in the 'card title' or 'card summary'.
+// This function search and list for input value that matches with the values in the 'card title' or 'card summary'.
 function searchTheEpisodes() {
   const rootElem = document.getElementById("root");
   const allEpisodes = getAllEpisodes();
-  const searchNavBar = document.createElement("nav");
-  searchNavBar.className = "navbar navbar-light";
-  const searchFormElement = document.createElement("form");
-  searchFormElement.className = "form-inline";
-  const inputElement = document.createElement("input");
-  inputElement.className = "form-control mr-sm-2";
-  inputElement.setAttribute("type", "search");
-  inputElement.setAttribute("placeholder", "Search...");
-  inputElement.setAttribute("aria-label", "Search");
-  const inputSpanElement = document.createElement("span");
-  inputSpanElement.textContent = "Display how many episodes match the current search";
-
-  rootElem.prepend(searchNavBar);
-  searchNavBar.appendChild(searchFormElement);
-  searchFormElement.appendChild(inputElement);
-  searchFormElement.appendChild(inputSpanElement);
+  const inputSearchElement = document.querySelector('#inputSearch');
+  const inputSpanElement = document.querySelector('.searchHolder');
 
   function inputSelect(e) {
     const addedInput = e.target.value.toLowerCase();
@@ -109,9 +95,9 @@ function searchTheEpisodes() {
       }
     });
     let newList = list.filter((item) => item.style.display === "block");
-    inputSpanElement.textContent = `Search result: ${newList.length}/73 episodes match the current search`;
+    inputSpanElement.textContent = `Search result: ${newList.length}/${list.length} episodes match the current search`;
   }
-  inputElement.addEventListener("input", inputSelect);
+  inputSearchElement.addEventListener("input", inputSelect);
 }
 // This function  selects episode and shows that episode only in the window.
 function selectTheEpisodeFromList() {
