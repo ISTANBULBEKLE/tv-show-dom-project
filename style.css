@@ -1,5 +1,5 @@
 body{
-
+  background-color: #a2d5f2;
 }
 
 #root {
@@ -9,42 +9,16 @@ body{
 }
 h1{
   background-color: #a2d5f2;
- text-align: center;
-}
-.container{
-
-}
-select{
-  margin:10px;
-}
-.row{
-  display: flex;
-  justify-content: center;
-}
-nav{
-  background-color: #a2d5f2;
-  margin-top:10px;
-}
-/* .navbar.navbar-light.bg-light{
-  background-color: #d8d3cd;
-} */
-.card {
-  margin: 10px;
-
-}
-.card-header{
-  width:100%;
-  margin-bottom: 10px;
-}
-.card-footer{
-  margin-bottom: 0px;
+  text-align: center;
 }
 
-.form-inline{
- /*  width:50%; */
- 
+label {
+  height: 37px;
 }
-.form-control{
-
+#firstLabel{
 }
-
+button{
+  margin-right:5px;
+  width: 30px;
+  height: 37px;
+}
