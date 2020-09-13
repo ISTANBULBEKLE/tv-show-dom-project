@@ -27,8 +27,6 @@ function createAndSelectMenuForShows() {
     return 0;
   })
 
-
-
   const showDiv = document.querySelector("#firstSelectDiv");
   //const selectShow = document.querySelector("#selectShows");
   sortedAllShows.forEach((show) => {
@@ -39,48 +37,14 @@ function createAndSelectMenuForShows() {
     selectShow.appendChild(showOption);
 
   });
+
   selectShow.addEventListener("change", event => {
     alert(event.target.value);
     fetchEpisodesFromAPI(event.target.value);
+
   });
 
 }
-
-//createAndSelectMenuForShows();
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-// This function will populate the names of the shows from the API end point;
-
-// const fetchTheShowFromAPI = (id) => {
-//   fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
-//   .then(response => response.json())
-//   .then(data => fetchDataFromAPI(data));
-// }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-// This function will select the show from the list and call also the related episodes;
-
-//selectFromShowMenu);
-
-// function selectFromShowMenu(event) {
-//   let selectedShow = '';
-//   if (event.target.value === "none") {
-//     selectShow.innerHTML = "";
-//     makePageForEpisodes(event);
-//   } else {
-//     selectedShow = allShows.filter((show) => {
-//       return (`${show.name}` === selectedShow.value);
-//     });
-//     selectShow.innerHTML = "";
-//     makePageForEpisodes(selectedShow);
-//   };
-//   selectedShow.value = "";
-// }
-
-/* const showList = document.querySelector('#selectShows').childNodes;
-console.log(showList); */
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -185,12 +149,10 @@ function searchTheEpisodes() {
 
 function selectTheEpisodeFromList() {
   const selectTheEpisodes = document.querySelector("#selectEpisodes");
-
   selectTheEpisodes.addEventListener("change", selectFromMenu);
 
   function selectFromMenu(event) {
     let selectedEpisode = event.target.value.split(" - ");
-
     let stopGap = selectedEpisode[0];
     selectedEpisode[0] = selectedEpisode[1];
     selectedEpisode[1] = stopGap;
@@ -213,9 +175,9 @@ function selectTheEpisodeFromList() {
 
 // This function when called by the button clicked, the window will refresh with the episodes of the selected show.
 
-// /* const clearWindowButton = document.querySelector('#clearWindow');
+/* const clearWindowButton = document.querySelector('#clearWindow');
 
-// clearWindowButton.addEventListener('click', fetchEpisodesFromAPI); */
+clearWindowButton.addEventListener('click', fetchEpisodesFromAPI); */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
