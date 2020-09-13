@@ -24,6 +24,7 @@
           <label class="input-group-text" id='firstLabel' for="selectShows">Select the shows</label>
         </div>
       </div>
+
       <div class="input-group col" id='secondSelectDiv'>
         <select class="custom-select" id="selectEpisodes">
 
@@ -32,14 +33,18 @@
           <label class="input-group-text" id='secondLabel' for="selectEpisodes">Select the episodes</label>
         </div>
       </div>
-      <button type="button" class="btn btn-warning btn-sm col">Clear the window</button>
+
+      <button id='clearWindow' type="button" class="btn btn-warning btn-sm col">Clear the window</button>
+
       <nav class="navbar navbar-light bg-light col">
         <form class="form-inline" is='formInlineCover'>
           <input id='inputSearch' class="form-control mr-sm-1" type="search" placeholder="Search" aria-label="Search">
           <span class='searchHolder'>Display number of episodes</span>
         </form>
       </nav>
+
     </div>
+
     <div class='container' id='coverCardContainer'>
       <div id='cardContainer' class='row'>
 
