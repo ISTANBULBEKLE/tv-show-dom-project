@@ -2,10 +2,7 @@
 
 function setup() {
   getAllShows();
-  // let allEpisodes = getAllEpisodes();
-  // console.log(getAllShows());
   createAndSelectMenuForShows();
-  // makePageForEpisodes(allEpisodes);
   fetchEpisodesFromAPI();
   searchTheEpisodes();
   selectTheEpisodeFromList();
@@ -38,12 +35,11 @@ function createAndSelectMenuForShows() {
 
   });
 
+
   selectShow.addEventListener("change", event => {
-    alert(event.target.value);
     fetchEpisodesFromAPI(event.target.value);
-
   });
-
+  fetchEpisodesFromAPI(sortedAllShows[0].id);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +62,9 @@ function makePageForEpisodes(episodeList) {
   /* const rootElem = document.getElementById("root");
   const containerName = document.querySelector(".container"); */
   const divRow = document.querySelector("#cardContainer");
+  divRow.innerHTML = "";
   const selectTheEpisodes = document.querySelector("#selectEpisodes");
+  selectTheEpisodes.innerHTML = "";
   const optionElement = document.createElement("option");
   optionElement.innerText = "All episodes";
   selectTheEpisodes.appendChild(optionElement);
@@ -175,9 +173,14 @@ function selectTheEpisodeFromList() {
 
 // This function when called by the button clicked, the window will refresh with the episodes of the selected show.
 
-/* const clearWindowButton = document.querySelector('#clearWindow');
+const clearWindowButton = document.querySelector('#clearWindow');
 
-clearWindowButton.addEventListener('click', fetchEpisodesFromAPI); */
+clearWindowButton.addEventListener('click', function () {
+  const divRow = document.querySelector("#cardContainer");
+  divRow.innerHTML = "";
+  const selectTheEpisodes = document.querySelector("#selectEpisodes");
+  selectTheEpisodes.innerHTML = "";
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
