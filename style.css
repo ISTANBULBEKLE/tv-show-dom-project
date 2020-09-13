@@ -25,3 +25,10 @@ button{
 .card{
 margin-right: 0px;
 }
+
+/*  Styling for Show Summary Element  */
+
+#showCardImg{
+  width:100%;
+  height: 250px;
+}
