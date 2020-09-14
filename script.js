@@ -9,17 +9,44 @@ function setup() {
   selectTheEpisodeFromList();
 }
 const selectShow = document.querySelector("#selectShows");
+
+////////////////////////////////////////////////////////////////////////////////
+//*This function will syncronise the window events
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// This function when called by the button clicked, the window will refresh with the episodes of the selected show.
+
+function syncTheWindowEvents (){
+  
+}
+
+const clearWindowButton = document.querySelector("#clearWindow");
+
+clearWindowButton.addEventListener("click", function () {
+  const divRow = document.querySelector("#cardContainer");
+  divRow.innerHTML = "";
+  const selectTheEpisodes = document.querySelector("#selectEpisodes");
+  selectTheEpisodes.innerHTML = "";
+  const showContainer = document.querySelector("#showCard");
+
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 // * This function will create a card for each show with mentioned information.
 
 function createSummaryCardForShows() {
   const allShows = getAllShows();
-  const coverShowContainer = document.querySelector("#coverShowContainer");
   const showContainer = document.querySelector("#showContainer");
 
   allShows.forEach((show) => {
     const showCard = document.createElement("div");
+    showCard.id = 'showCard';
     showCard.className = "card mb-3";
     showCard.style = "max-width: 540px;";
     const showCardRow = document.createElement("div");
@@ -245,20 +272,7 @@ function selectTheEpisodeFromList() {
   }
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
 
-// This function when called by the button clicked, the window will refresh with the episodes of the selected show.
-
-const clearWindowButton = document.querySelector("#clearWindow");
-
-clearWindowButton.addEventListener("click", function () {
-  const divRow = document.querySelector("#cardContainer");
-  divRow.innerHTML = "";
-  const selectTheEpisodes = document.querySelector("#selectEpisodes");
-  selectTheEpisodes.innerHTML = "";
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////
 
 window.onload = setup;
 
