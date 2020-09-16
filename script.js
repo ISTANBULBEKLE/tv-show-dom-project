@@ -126,7 +126,7 @@ function createAndSelectMenuForShows() {
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-// * This function is to fetch the data from the API and for calling the initial makePageForEpisodes ();
+// * This function is to fetch the data from the API and than render the episodes by calling the initial makePageForEpisodes () function;
 
 const fetchEpisodesFromAPI = (id) => {
   fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
@@ -137,7 +137,7 @@ const fetchEpisodesFromAPI = (id) => {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-// This function creates a card for each episode and grab them as a whole on screen with window.onload.
+// This function creates a card for each episode
 
 function makePageForEpisodes(episodeList) {
   /* const rootElem = document.getElementById("root");
@@ -263,7 +263,7 @@ function selectTheEpisodeFromList() {
 
 
 ////////////////////////////////////////////////////////////////////////////////
-//*When clicked the windows.onload starting state will be displayed again.
+//*When clicked, the window.onload starting state will be displayed again.
 
 const clearWindowButton = document.querySelector("#clearWindow");
 
