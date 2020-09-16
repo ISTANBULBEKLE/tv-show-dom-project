@@ -1,40 +1,12 @@
 // This function is called with window onload calling other functions.
 
 function setup() {
-  // getAllShows();
   createAndSelectMenuForShows();
   createSummaryCardForShows();
-  fetchEpisodesFromAPI();
   searchTheEpisodes();
   selectTheEpisodeFromList();
 }
 const selectShow = document.querySelector("#selectShows");
-
-////////////////////////////////////////////////////////////////////////////////
-//*This function will syncronise the window events
-
-///////////////////////////////////////////////////////////////////////////////////////////////
-
-// This function when called by the button clicked, the window will refresh with the episodes of the selected show.
-
-function syncTheWindowEvents (){
-  
-}
-
-const clearWindowButton = document.querySelector("#clearWindow");
-
-clearWindowButton.addEventListener("click", function () {
-  const divRow = document.querySelector("#cardContainer");
-  divRow.innerHTML = "";
-  const selectTheEpisodes = document.querySelector("#selectEpisodes");
-  selectTheEpisodes.innerHTML = "";
-  const showContainer = document.querySelector("#showCard");
-
-});
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,9 +29,12 @@ function createSummaryCardForShows() {
     const showCardRowDiv1Img = document.createElement('img');
     showCardRowDiv1Img.className = 'crd-img';
     showCardRowDiv1Img.id = 'showCardImg';
-    showCardRowDiv1Img.src = show.image.original;
-    showCardRowDiv1Img.alt = 'This is the img of show';
 
+    if (show.image !== null) {
+      showCardRowDiv1Img.src = show.image.original;
+    }
+
+    showCardRowDiv1Img.alt = 'This is the img of show';
     const showCardRowDiv2 = document.createElement('div');
     showCardRowDiv2.className = 'col-md-8';
     const showCardRowDiv2Div1 = document.createElement('div');
@@ -69,7 +44,8 @@ function createSummaryCardForShows() {
     showCardTitle.innerText = show.name;
     const showCardSummary = document.createElement('p');
     showCardSummary.className = 'card-text';
-    showCardSummary.innerText = show.summary;
+
+    showCardSummary.innerHTML = show.summary;
 
     const showCardBody = document.createElement('div');
     showCardBody.className = 'card-body';
@@ -130,21 +106,23 @@ function createAndSelectMenuForShows() {
   const selectShow = document.querySelector("#selectShows");
   sortedAllShows.forEach((show) => {
     const showOption = document.createElement("option");
-    //showOption.setAttribute("value", show.id);
     showOption.value = show.id;
     showOption.innerText = show.name;
     selectShow.appendChild(showOption);
   });
 
   selectShow.addEventListener("change", (event) => {
-    fetchEpisodesFromAPI(event.target.value);
+    const showContainer = document.querySelector('#showContainer');
+    if (event.target.value === '') {
+      showContainer.style.display = 'flex';
+    } else {
+      fetchEpisodesFromAPI(event.target.value);
+      showContainer.style.display = 'none';
+    }
   });
-  fetchEpisodesFromAPI(sortedAllShows[0].id);
+
+  // fetchEpisodesFromAPI(sortedAllShows[0].id);
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-// *
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -180,22 +158,33 @@ function makePageForEpisodes(episodeList) {
       episode.name
     }`;
 
+    optionElement.value = `S${episode.season
+      .toString()
+      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`;
+
     selectTheEpisodes.appendChild(optionElement);
 
     const divCard = document.createElement("div");
     divCard.className = "card col-3";
+
+    divCard.id = `S${episode.season
+      .toString()
+      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`;
     const divCardHeader = document.createElement("div");
     divCardHeader.className = "card-header";
     const episodeName = document.createElement("h5");
     episodeName.className = "card-title";
     episodeName.innerText = `${
       episode.name
-    } - S${episode.season
-      .toString()
-      .padStart(2, "0")}E${episode.number.toString().padStart(2, "0")}`;
+    } ${divCard.id}`;
+
     const episodeImage = document.createElement("img");
     episodeImage.className = "card-img-top";
-    episodeImage.src = episode.image.medium;
+
+    if (episode.image !== null) {
+      episodeImage.src = episode.image.medium;
+    }
+
     const cardPElement = document.createElement("p");
     cardPElement.className = "card-text";
     cardPElement.innerHTML = episode.summary;
@@ -252,19 +241,19 @@ function selectTheEpisodeFromList() {
   const selectTheEpisodes = document.querySelector("#selectEpisodes");
   selectTheEpisodes.addEventListener("change", selectFromMenu);
 
+  console.log(selectTheEpisodes);
+
   function selectFromMenu(event) {
-    let selectedEpisode = event.target.value.split(" - ");
-    let stopGap = selectedEpisode[0];
-    selectedEpisode[0] = selectedEpisode[1];
-    selectedEpisode[1] = stopGap;
-    let selectedEpisodeString = selectedEpisode.join(" - ");
+    let selectedEpisode = event.target.value;
     const cardList = document.querySelectorAll(".card");
+
+    console.log(cardList);
 
     cardList.forEach((episode) => {
       if (event.target.value === "All episodes") {
         episode.style.display = "block";
       } else {
-        episode.innerHTML.includes(selectedEpisodeString) ?
+        episode.id === event.target.value ?
           (episode.style.display = "block") :
           (episode.style.display = "none");
       }
@@ -273,21 +262,19 @@ function selectTheEpisodeFromList() {
 }
 
 
+////////////////////////////////////////////////////////////////////////////////
+//*When clicked the windows.onload starting state will be displayed again.
+
+const clearWindowButton = document.querySelector("#clearWindow");
+
+clearWindowButton.addEventListener("click", function () {
+  const showContainer = document.querySelector('#showContainer')
+  showContainer.style.display = 'flex';
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 window.onload = setup;
 
-/*
-get data from API;
-
-array of the episodes;
-
-call the function makePageFor....
-
-within this function we have to create an objects with the episodes
-and the options for episodes selector;
-
-we have to add on the page the event listeners
-one for string search and another one for selector
-
-
-*/
+// End of the code page
+//////////////////////////////////////////////////////////////////////////////////////////////

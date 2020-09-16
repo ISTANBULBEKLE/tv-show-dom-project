@@ -35,3 +35,20 @@ margin-right: 0px;
 #showCard{
   margin-right:3px;
 }
+#firstSelectDiv{
+margin-left:20px;
+margin-right:5px;
+padding:0px;
+}
+#secondSelectDiv{
+  margin-left:0px;
+  padding:0px;
+  margin-right:10px;
+}
+#searchInputArea{
+  padding:0px;
+  background-color: #a2d5f2;
+}
+#formInlineCover{
+background-color: #a2d5f2;
+}
