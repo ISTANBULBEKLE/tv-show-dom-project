@@ -228,7 +228,7 @@ function searchTheEpisodes() {
       }
     });
     let newList = list.filter((item) => item.style.display === "block");
-    inputSpanElement.textContent = `Search result: ${newList.length}/${list.length} episodes match the current search`;
+    inputSpanElement.textContent = `Search result: ${newList.length} episodes/shows match the current search`;
   }
   inputSearchElement.addEventListener("input", inputSelect);
 }
