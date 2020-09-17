@@ -18,56 +18,55 @@ function createSummaryCardForShows() {
 
   allShows.forEach((show) => {
     const showCard = document.createElement("div");
-    showCard.id = 'showCard';
+    showCard.id = "showCard";
     showCard.className = "card mb-3";
     showCard.style = "max-width: 540px;";
     const showCardRow = document.createElement("div");
     showCardRow.className = "row no-gutters";
 
-    const showCardRowDiv1 = document.createElement('div');
-    showCardRowDiv1.className = 'col-md-4';
-    const showCardRowDiv1Img = document.createElement('img');
-    showCardRowDiv1Img.className = 'crd-img';
-    showCardRowDiv1Img.id = 'showCardImg';
+    const showCardRowDiv1 = document.createElement("div");
+    showCardRowDiv1.className = "col-md-4";
+    const showCardRowDiv1Img = document.createElement("img");
+    showCardRowDiv1Img.className = "crd-img";
+    showCardRowDiv1Img.id = "showCardImg";
 
     if (show.image !== null) {
       showCardRowDiv1Img.src = show.image.original;
     }
 
-    showCardRowDiv1Img.alt = 'This is the img of show';
-    const showCardRowDiv2 = document.createElement('div');
-    showCardRowDiv2.className = 'col-md-8';
-    const showCardRowDiv2Div1 = document.createElement('div');
-    showCardRowDiv2Div1.className = 'card-body';
-    const showCardTitle = document.createElement('h5');
-    showCardTitle.className = 'card-title';
+    showCardRowDiv1Img.alt = "This is the img of show";
+    const showCardRowDiv2 = document.createElement("div");
+    showCardRowDiv2.className = "col-md-8";
+    const showCardRowDiv2Div1 = document.createElement("div");
+    showCardRowDiv2Div1.className = "card-body";
+    const showCardTitle = document.createElement("h5");
+    showCardTitle.className = "card-title";
     showCardTitle.innerText = show.name;
-    const showCardSummary = document.createElement('p');
-    showCardSummary.className = 'card-text';
+    const showCardSummary = document.createElement("p");
+    showCardSummary.className = "card-text";
 
     showCardSummary.innerHTML = show.summary;
 
-    const showCardBody = document.createElement('div');
-    showCardBody.className = 'card-body';
-    const showCardBodyUlElement = document.createElement('ul');
-    showCardBodyUlElement.className = 'list-group list-group-flush';
+    const showCardBody = document.createElement("div");
+    showCardBody.className = "card-body";
+    const showCardBodyUlElement = document.createElement("ul");
+    showCardBodyUlElement.className = "list-group list-group-flush";
 
-    const showBodyLiElement1 = document.createElement('li');
-    showBodyLiElement1.className = 'list-group-item text-right';
+    const showBodyLiElement1 = document.createElement("li");
+    showBodyLiElement1.className = "list-group-item text-right";
     showBodyLiElement1.innerHTML = `Genres: ${show.genres}`;
 
-    const showBodyLiElement2 = document.createElement('li');
-    showBodyLiElement2.className = 'list-group-item text-right';
+    const showBodyLiElement2 = document.createElement("li");
+    showBodyLiElement2.className = "list-group-item text-right";
     showBodyLiElement2.innerHTML = `Status: ${show.status}`;
 
-    const showBodyLiElement3 = document.createElement('li');
-    showBodyLiElement3.className = 'list-group-item text-right';
+    const showBodyLiElement3 = document.createElement("li");
+    showBodyLiElement3.className = "list-group-item text-right";
     showBodyLiElement3.innerHTML = `Rating: ${show.rating.average}`;
 
-    const showBodyLiElement4 = document.createElement('li');
-    showBodyLiElement4.className = 'list-group-item text-right';
+    const showBodyLiElement4 = document.createElement("li");
+    showBodyLiElement4.className = "list-group-item text-right";
     showBodyLiElement4.innerHTML = `Runtime: ${show.runtime}`;
-
 
     showContainer.appendChild(showCard);
     showCard.appendChild(showCardRow);
@@ -83,7 +82,6 @@ function createSummaryCardForShows() {
     showCardBodyUlElement.appendChild(showBodyLiElement2);
     showCardBodyUlElement.appendChild(showBodyLiElement3);
     showCardBodyUlElement.appendChild(showBodyLiElement4);
-
   });
 }
 
@@ -112,12 +110,12 @@ function createAndSelectMenuForShows() {
   });
 
   selectShow.addEventListener("change", (event) => {
-    const showContainer = document.querySelector('#showContainer');
-    if (event.target.value === '') {
-      showContainer.style.display = 'flex';
+    const showContainer = document.querySelector("#showContainer");
+    if (event.target.value === "") {
+      showContainer.style.display = "flex";
     } else {
       fetchEpisodesFromAPI(event.target.value);
-      showContainer.style.display = 'none';
+      showContainer.style.display = "none";
     }
   });
 
@@ -174,9 +172,7 @@ function makePageForEpisodes(episodeList) {
     divCardHeader.className = "card-header";
     const episodeName = document.createElement("h5");
     episodeName.className = "card-title";
-    episodeName.innerText = `${
-      episode.name
-    } ${divCard.id}`;
+    episodeName.innerText = `${episode.name} ${divCard.id}`;
 
     const episodeImage = document.createElement("img");
     episodeImage.className = "card-img-top";
@@ -244,7 +240,6 @@ function selectTheEpisodeFromList() {
   console.log(selectTheEpisodes);
 
   function selectFromMenu(event) {
-    let selectedEpisode = event.target.value;
     const cardList = document.querySelectorAll(".card");
 
     console.log(cardList);
@@ -253,14 +248,13 @@ function selectTheEpisodeFromList() {
       if (event.target.value === "All episodes") {
         episode.style.display = "block";
       } else {
-        episode.id === event.target.value ?
-          (episode.style.display = "block") :
-          (episode.style.display = "none");
+        episode.id === event.target.value
+          ? (episode.style.display = "block")
+          : (episode.style.display = "none");
       }
     });
   }
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 //*When clicked, the window.onload starting state will be displayed again.
@@ -268,8 +262,8 @@ function selectTheEpisodeFromList() {
 const clearWindowButton = document.querySelector("#clearWindow");
 
 clearWindowButton.addEventListener("click", function () {
-  const showContainer = document.querySelector('#showContainer')
-  showContainer.style.display = 'flex';
+  const showContainer = document.querySelector("#showContainer");
+  showContainer.style.display = "flex";
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
