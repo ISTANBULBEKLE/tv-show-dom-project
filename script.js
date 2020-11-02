@@ -138,8 +138,6 @@ const fetchEpisodesFromAPI = (id) => {
 // This function creates a card for each episode
 
 function makePageForEpisodes(episodeList) {
-  /* const rootElem = document.getElementById("root");
-  const containerName = document.querySelector(".container"); */
   const divRow = document.querySelector("#cardContainer");
   divRow.innerHTML = "";
   const selectTheEpisodes = document.querySelector("#selectEpisodes");
@@ -237,12 +235,8 @@ function selectTheEpisodeFromList() {
   const selectTheEpisodes = document.querySelector("#selectEpisodes");
   selectTheEpisodes.addEventListener("change", selectFromMenu);
 
-  console.log(selectTheEpisodes);
-
   function selectFromMenu(event) {
     const cardList = document.querySelectorAll(".card");
-
-    console.log(cardList);
 
     cardList.forEach((episode) => {
       if (event.target.value === "All episodes") {
